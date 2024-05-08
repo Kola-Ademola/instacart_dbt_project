@@ -1,0 +1,39 @@
+
+version: 2
+
+sources:
+  - name: instacart_db
+    description: "Instacart db clone"
+    database: instacart_restore
+    schema: public
+    tables:
+      - name: customers
+        description: "The raw Instacart customer data"
+        columns:
+          - name: customer_id
+            description: "PK column for the customers table"
+      - name: orders
+        description: "The raw Instacart orders data"
+        columns:
+          - name: order_id
+            description: "PK column for the orders table"
+      - name: aisles
+        description: "The raw Instacart aisles data"
+        columns: 
+          - name: aisle_id
+            description: "PK column for aisles table"
+      - name: department
+        description: "The raw Instacart departments data"
+        columns: 
+          - name: department_id
+            description: "PK column for dept table"
+      - name: payment
+        description: "The raw Instacart payments data"
+        columns: 
+          - name: payment_id
+            description: "PK column for payments table"  
+      - name: products
+        description: "The raw Instacart products data"
+        columns: 
+          - name: product_id
+            description: "PK column for products table"                     
