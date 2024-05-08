@@ -1,4 +1,4 @@
--- staging the aisles data
+-- staging the aisles data_
 
 WITH source AS(
     SELECT *
