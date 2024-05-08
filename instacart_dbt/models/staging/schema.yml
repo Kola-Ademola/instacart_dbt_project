@@ -15,11 +15,35 @@ sources:
             tests:
               - unique
               - not_null
+          - name: gender
+            description: "Customer gender data"
+            tests:
+              - accepted_values:
+                  values:
+                    - Male
+                    - Female
       - name: products
         description: "The raw Instacart products data"
         columns: 
           - name: product_id
-            description: "PK column for products table"   
+            description: "PK column for products table"
+            tests:
+              - unique
+              - not_null
+          - name: aisle_id
+            description: "FK column relating to the aisles table"
+            tests:
+              - not_null
+              - relationships:
+                  to: ref('instacart_db', 'aisles')
+                  field: aisle_id
+          - name: department_id
+            description: "FK column relating to the departments table"
+            tests:
+              - not_null
+              - relationships:
+                  to: ref('instacart_db', 'departments')
+                  field: department_id
       - name: orders
         description: "The raw Instacart orders data"
         columns:
@@ -55,11 +79,17 @@ sources:
         columns: 
           - name: aisle_id
             description: "PK column for aisles table"
+            tests:
+              - not_null
+              - unique
       - name: department
         description: "The raw Instacart departments data"
         columns: 
           - name: department_id
             description: "PK column for dept table"
+            tests:
+              - not_null
+              - unique
       - name: payment
         description: "The raw Instacart payments data"
         columns: 
