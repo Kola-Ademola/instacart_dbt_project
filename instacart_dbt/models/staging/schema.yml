@@ -12,11 +12,44 @@ sources:
         columns:
           - name: customer_id
             description: "PK column for the customers table"
+            tests:
+              - unique
+              - not_null
+      - name: products
+        description: "The raw Instacart products data"
+        columns: 
+          - name: product_id
+            description: "PK column for products table"   
       - name: orders
         description: "The raw Instacart orders data"
         columns:
           - name: order_id
             description: "PK column for the orders table"
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+            description: "FK column relating to the customers table"
+            tests:
+              - not_null
+              - relationships:
+                  to: ref('instacart_db', 'customers')
+                  field: customer_id
+          - name: product_id
+            description: "FK column relating to the products table"
+            tests:
+              - not_null
+              - relationships: 
+                  to: ref('instacart_db', 'products')
+                  field: product_id
+          - name: order_status
+            description: "Order status of all orders"
+            tests:
+              - accepted_values:
+                  values:
+                    - Delivered
+                    - Processing
+                    - Shipped
       - name: aisles
         description: "The raw Instacart aisles data"
         columns: 
@@ -32,8 +65,3 @@ sources:
         columns: 
           - name: payment_id
             description: "PK column for payments table"  
-      - name: products
-        description: "The raw Instacart products data"
-        columns: 
-          - name: product_id
-            description: "PK column for products table"                     
